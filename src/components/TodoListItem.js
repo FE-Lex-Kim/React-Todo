@@ -7,15 +7,15 @@ import {
 } from 'react-icons/io';
 import cn from 'classnames';
 
-const TodoListItem = ({ todo }) => {
-  const { text, checked } = todo;
+const TodoListItem = ({ todo, onRemove }) => {
+  const { id, text, checked } = todo;
   return (
     <div className="TodoListItem">
       <div className={cn('checkbox', { checked })}>
         {checked ? <IoIosCheckboxOutline /> : <IoIosSquareOutline />}
         <div className="text">{text}</div>
       </div>
-      <div className="remove">
+      <div className="remove" onClick={() => onRemove(id)}>
         <IoIosRemoveCircle />
       </div>
     </div>

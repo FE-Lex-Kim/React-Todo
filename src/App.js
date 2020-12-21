@@ -34,10 +34,14 @@ function App() {
     [todos],
   );
 
+  const onRemove = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <TodoTemplete>
       <Todoinsert insertTodoListItem={insertTodoListItem} />
-      <TodoList todos={todos} />
+      <TodoList onRemove={onRemove} todos={todos} />
     </TodoTemplete>
   );
 }
