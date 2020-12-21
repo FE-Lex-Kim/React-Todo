@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useCallback, useState } from 'react';
 import './App.css';
 import Todoinsert from './components/Todoinsert';
 import TodoList from './components/TodoList';
@@ -23,9 +23,20 @@ function App() {
     },
   ]);
 
+  // 다음 id값을 정해준다.
+  const nextId = useRef(4);
+
+  const insertTodoListItem = useCallback(
+    (text) => {
+      setTodos([...todos, { id: nextId.current, text, checked: false }]);
+      nextId.current += 1;
+    },
+    [todos],
+  );
+
   return (
     <TodoTemplete>
-      <Todoinsert />
+      <Todoinsert insertTodoListItem={insertTodoListItem} />
       <TodoList todos={todos} />
     </TodoTemplete>
   );
