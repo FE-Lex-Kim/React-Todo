@@ -1,37 +1,28 @@
-import React, { useCallback, useState } from 'react';
-import { IoIosAlarm } from 'react-icons/io';
+import React, { useState } from 'react';
+import { MdAdd } from 'react-icons/md';
 import './Todoinsert.scss';
 
-const Todoinsert = ({ insertTodoListItem }) => {
+const TodoInsert = ({ insertTodoitem }) => {
   const [value, setValue] = useState('');
-  const onChange = useCallback((e) => {
-    setValue(e.target.value);
-  }, []);
-
-  const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      if (value === '') return;
-      insertTodoListItem(value);
-      setValue('');
-    },
-    [insertTodoListItem, value],
-  );
-
+  const onSubmit = (e) => {
+    e.preventDefault();
+    insertTodoitem(value);
+    setValue('');
+  };
   return (
-    <div>
-      <form className="TodoInsert" onSubmit={onSubmit}>
-        <input
-          value={value}
-          onChange={onChange}
-          placeholder="할 일을 입력하세요"
-        />
-        <button type="submit">
-          <IoIosAlarm />
-        </button>
-      </form>
-    </div>
+    <form className="TodoInsert" onSubmit={onSubmit}>
+      <input
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+        placeholder="할 일을 입력하세요"
+      />
+      <button type="submit">
+        <MdAdd />
+      </button>
+    </form>
   );
 };
 
-export default Todoinsert;
+export default TodoInsert;
